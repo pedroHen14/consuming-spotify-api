@@ -23,7 +23,7 @@ export const ModalContainer = styled.section`
 
   overflow-y: auto;
 
-  background-color: var(--dark);
+  background-color: var(--secondary);
   box-shadow: 0px 0px 10px black;
   border-radius: 4px;
 

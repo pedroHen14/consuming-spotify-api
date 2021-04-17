@@ -56,3 +56,8 @@ export const ImageModal = styled.div`
     border-radius: 10px;
   }
 `;
+
+export const BodyModal = styled.div`
+  display: flex;
+  padding: 10px;
+`;

@@ -4,6 +4,7 @@ import InputSearch from "../../components/InputSearch";
 
 import {
   Body,
+  BodyModal,
   Container,
   ContainerListTrack,
   Header,
@@ -13,6 +14,7 @@ import {
 import ListTrack from "../../components/ListTrack";
 import imageLogo from "../../assets/logoSpotify.png";
 import Modal from "../../components/Modal";
+import Loading from "../../components/Loading";
 
 function Home() {
   const [trackList, setTrackList] = useState([]);
@@ -22,6 +24,8 @@ function Home() {
   const [openModal, setOpenModal] = useState(false);
 
   const [search, setSearch] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (e) => {
     setSearch(e.target.value);
@@ -48,28 +52,35 @@ function Home() {
   };
 
   const handleModalTrack = async (id) => {
-    setOpenModal(true);
+    setIsLoading(true);
 
     try {
       const response = await api.get(`/tracks/${id}`);
 
       setTrackInModal(response.data);
+      setOpenModal(true);
+
+      setIsLoading(false);
       console.log(response.data);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      {isLoading && <Loading />}
       {openModal && (
         <Modal
           title={trackInModal.name}
           handleClose={() => setOpenModal(false)}
         >
-          <ImageModal>
-            <img src={trackInModal.album.images[0].url} alt="" />
-          </ImageModal>
+          <BodyModal>
+            <ImageModal>
+              <img src={trackInModal.album.images[0].url} alt="" />
+            </ImageModal>
+          </BodyModal>
         </Modal>
       )}
       <Container>

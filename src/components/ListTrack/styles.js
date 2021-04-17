@@ -14,4 +14,6 @@ export const Container = styled.div`
 export const Artists = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 `;
